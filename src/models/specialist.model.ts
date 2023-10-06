@@ -1,38 +1,32 @@
 import mongoose, { Schema, model } from 'mongoose';
-import { userType } from '../types/user.type';
+import { speciallisType } from '../types/spcial.type';
 
-const userSchema = new Schema<userType>(
+const specialistSchema = new Schema<speciallisType>(
   {
     name: {
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    photoURl: {
+    designation: {
       type: String,
       required: true,
     },
-    address: {
+    bio: {
       type: String,
       required: true,
     },
-    phoneNumber: {
-      type: String,
-    },
-    role: {
-      enum: ['user', 'admin'],
-      default: 'user',
+    photoURL: {
       type: String,
       required: true,
     },
-    booking: [
+    dateOfBirth: {
+      type: String,
+      required: true,
+    },
+    beautyPackages: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking',
+        ref: 'BeautyPackage',
       },
     ],
   },
@@ -41,6 +35,6 @@ const userSchema = new Schema<userType>(
   }
 );
 
-const userModel = model<userType>('User', userSchema);
+const SpecialistModel = model<speciallisType>('', specialistSchema);
 
-export default userModel;
+export default SpecialistModel;
