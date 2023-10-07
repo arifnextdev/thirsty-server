@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import AuthController from '../controllers/auth.controller';
 
 const beautyPackageRouter: Router = express.Router();
 
