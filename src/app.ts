@@ -6,11 +6,11 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import authRouter from '../routes/auth.route';
-import userRouter from '../routes/user.route';
-import beautyPackageRouter from '../routes/beautyPackage.route';
-import specialistRouter from '../routes/specialist.route';
-import bookingRouter from '../routes/booking.route';
+import authRouter from './routes/auth.route';
+import userRouter from './routes/user.route';
+import beautyPackageRouter from './routes/beautyPackage.route';
+import specialistRouter from './routes/specialist.route';
+import bookingRouter from './routes/booking.route';
 
 class App {
   private app: Application;
