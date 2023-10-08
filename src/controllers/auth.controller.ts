@@ -3,7 +3,7 @@ import UserModel from '../models/user.model';
 import JWTTokenManager from '../managers/jwt.token.manager';
 import { handleError } from '../errors/handle.error';
 
-const jwtinstance = new JWTTokenManager();
+const jwtInstance = new JWTTokenManager();
 
 export default class AuthController {
   constructor() {}
@@ -23,7 +23,7 @@ export default class AuthController {
           phoneNumber
         );
 
-        const token = jwtinstance.createToken(user._id);
+        const token = jwtInstance.createToken(user._id);
 
         res.status(200).json({ user, token });
       });
@@ -31,6 +31,7 @@ export default class AuthController {
       await handleError(error, res);
     }
   }
+
   public async login(req: Request, res: Response): Promise<void> {
     try {
       const { email, password } = req.body;
@@ -38,7 +39,7 @@ export default class AuthController {
       await Promise.resolve().then(async () => {
         const user = await UserModel.login(email, password);
 
-        const token = jwtinstance.createToken(user._id);
+        const token = jwtInstance.createToken(user._id);
 
         res.status(200).json({ user, token });
       });

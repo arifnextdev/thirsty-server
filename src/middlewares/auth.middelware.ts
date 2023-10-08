@@ -2,7 +2,6 @@ import { Response, Request, NextFunction } from 'express';
 import { userType } from '../types/user.type';
 import JWTTokenManager from '../managers/jwt.token.manager';
 import UserModel from '../models/user.model';
-import { userInfo } from 'os';
 
 interface JwtPayload {
   id: string;
@@ -14,7 +13,7 @@ declare module 'express' {
   }
 }
 
-const jwtinstance = new JWTTokenManager();
+const jwtInstance = new JWTTokenManager();
 
 export default class AuthMiddleware {
   constructor() {}
@@ -32,7 +31,7 @@ export default class AuthMiddleware {
     }
 
     try {
-      const payload = jwtinstance.verifyToken(token) as JwtPayload;
+      const payload = jwtInstance.verifyToken(token) as JwtPayload;
       const user = await UserModel.findById(payload.id);
 
       if (!user) {

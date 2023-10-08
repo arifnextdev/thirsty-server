@@ -43,11 +43,11 @@ class App {
 
     //bypassed api
 
-    this.app.use('api/auth', authRouter);
-    this.app.use('api/users', userRouter);
-    this.app.use('api/beauty_packages', beautyPackageRouter);
-    this.app.use('api/specialists', specialistRouter);
-    this.app.use('api/bookings', bookingRouter);
+    this.app.use('/api/auth', authRouter);
+    this.app.use('/api/users', userRouter);
+    this.app.use('/api/beauty_packages', beautyPackageRouter);
+    this.app.use('/api/specialists', specialistRouter);
+    this.app.use('/api/bookings', bookingRouter);
   }
 
   private connectToDatabase(): void {
