@@ -8,7 +8,7 @@ const authInstance = new AuthMiddleware();
 const userInstance = new UserController();
 
 //get an user
-userRouter.post('/:uid', authInstance.isAuthhenticated, userInstance.getAnUser);
+userRouter.get('/:uid', authInstance.isAuthhenticated, userInstance.getAnUser);
 
 //delete an user
 userRouter.delete(
@@ -24,8 +24,8 @@ userRouter.put(
   userInstance.updateAnUser
 );
 
-//get all users
-userRouter.post(
+//get all usersz
+userRouter.get(
   '/',
   authInstance.isAuthhenticated,
   authInstance.isAdmin,

@@ -57,13 +57,14 @@ export default class BeautyPackageController {
       await handleError(error, res);
     }
   }
+
   public async updateABeautyPackage(
     req: Request,
     res: Response
   ): Promise<void> {
     try {
-      const { bid } = req.params;
       const { title, description, category, images, price } = req.body;
+      const { bid } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(bid)) {
         res.status(404).json({ message: 'Beauty Package Not Found' });
@@ -71,6 +72,7 @@ export default class BeautyPackageController {
 
       await Promise.resolve().then(async () => {
         const beautyPackage = await BeautyPackageModel.findByIdAndUpdate(
+          bid,
           {
             title,
             description,

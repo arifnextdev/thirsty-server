@@ -1,5 +1,4 @@
 import express, { Router } from 'express';
-import AuthController from '../controllers/auth.controller';
 import AuthMiddleware from '../middlewares/auth.middelware';
 import BeautyPackageController from '../controllers/beutyPackage.controller';
 
@@ -17,8 +16,8 @@ beautyPackageRouter.get('/read');
 beautyPackageRouter.get('/:bid', beautyPackageInstance.getAnBeautyPackage);
 
 //create a beauty package
-beautyPackageRouter.get(
-  '/create',
+beautyPackageRouter.post(
+  '/',
   authInstance.isAuthhenticated,
   authInstance.isAdmin,
   beautyPackageInstance.createABeautyPackage

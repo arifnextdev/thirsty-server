@@ -11,7 +11,7 @@ const beautyPackageSchema = new Schema<beautyPackageType>(
       type: String,
       required: true,
     },
-    catagory: {
+    category: {
       type: String,
       required: true,
     },
@@ -39,7 +39,7 @@ const beautyPackageSchema = new Schema<beautyPackageType>(
 );
 
 const BeautyPackageModel = model<beautyPackageType>(
-  'BeaityPackage',
+  'BeautyPackage',
   beautyPackageSchema
 );
 

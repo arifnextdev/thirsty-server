@@ -8,16 +8,16 @@ const authInstance = new AuthMiddleware();
 const specialistInstance = new SpecialistController();
 
 // get all specialist
-specialistRouter.get('/:sid', specialistInstance.getAllSpecialists);
+specialistRouter.get('/', specialistInstance.getAllSpecialists);
 
 //get single specialist
 
 specialistRouter.get('/:sid', specialistInstance.getAnSpecialist);
 
-//add specialist
+//create specialist
 
 specialistRouter.post(
-  '/',
+  '/:bid',
   authInstance.isAuthhenticated,
   authInstance.isAdmin,
   specialistInstance.createASpecialist
@@ -26,8 +26,8 @@ specialistRouter.post(
 //update specialist
 specialistRouter.put(
   '/:sid',
-  authInstance.isAdmin,
   authInstance.isAuthhenticated,
+  authInstance.isAdmin,
   specialistInstance.updateASpecialist
 );
 //delete specialist

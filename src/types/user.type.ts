@@ -9,5 +9,5 @@ export type userType = {
   address: string;
   phoneNumber?: string;
   role: 'user' | 'admin';
-  booking: bookingType[];
+  bookings: bookingType[];
 } & Document;

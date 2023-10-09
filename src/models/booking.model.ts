@@ -17,6 +17,6 @@ const bookingSchema = new Schema<bookingType>(
   }
 );
 
-const BookingModel = model<bookingType>('BookingModel', bookingSchema);
+const BookingModel = model<bookingType>('Booking', bookingSchema);
 
 export default BookingModel;

@@ -12,7 +12,6 @@ export default class BookingController {
   public async createABooking(req: Request, res: Response): Promise<void> {
     try {
       const { bid } = req.params;
-      const userId = req.user?._id;
 
       if (!mongoose.Types.ObjectId.isValid(bid)) {
         res.status(404).json({ message: 'Beauty Package Not Found' });
@@ -20,7 +19,7 @@ export default class BookingController {
 
       const user = await UserModel.findById(req.user?._id).populate('bookings');
 
-      const alreadyBooked = user?.booking.find(
+      const alreadyBooked = user?.bookings.find(
         (booking: bookingType) => bid === booking.beautyPackage._id.toString()
       );
 
@@ -32,7 +31,7 @@ export default class BookingController {
       await Promise.resolve().then(async () => {
         const booking = await BookingModel.create({
           beautyPackage: bid,
-          user: req.query?._id,
+          user: req.user?._id,
         });
 
         await BeautyPackageModel.findByIdAndUpdate(bid, {
@@ -43,11 +42,56 @@ export default class BookingController {
 
         await UserModel.findByIdAndUpdate(req.user?._id, {
           $addToSet: {
-            booking: booking._id,
+            bookings: booking._id,
           },
         });
 
         res.status(200).json(booking);
+      });
+    } catch (error: unknown) {
+      await handleError(error, res);
+    }
+  }
+
+  public async deleteABooking(req: Request, res: Response): Promise<void> {
+    try {
+      const { bid } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(bid)) {
+        res.status(404).json({ message: 'Beauty Package Not Found' });
+      }
+
+      const existedBooking = await BookingModel.findById(bid);
+
+      if (existedBooking) {
+        res.status(403).json({ message: "Booking doesn't exist" });
+        return;
+      }
+      const user = await UserModel.findById(req.user?._id);
+
+      const mathchedBooking = user?.bookings.find(
+        (booking: bookingType) => bid === booking._id.toString()
+      );
+
+      if (!mathchedBooking) {
+        res.status(403).json({ message: "Booking doesn't exist" });
+      }
+
+      await Promise.resolve().then(async () => {
+        const booking = await BookingModel.findByIdAndDelete(bid);
+        res.status(200).json(booking);
+      });
+    } catch (error: unknown) {
+      await handleError(error, res);
+    }
+  }
+  public async getAllBooking(req: Request, res: Response): Promise<void> {
+    try {
+      await Promise.resolve().then(async () => {
+        const bookings = await BookingModel.find({}).populate(
+          'beautyPackage user'
+        );
+        res.status(200).json(bookings);
       });
     } catch (error: unknown) {
       await handleError(error, res);

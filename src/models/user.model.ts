@@ -36,7 +36,7 @@ const userSchema = new Schema<userType>(
       type: String,
       required: true,
     },
-    booking: [
+    bookings: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Booking',

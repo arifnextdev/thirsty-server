@@ -13,16 +13,16 @@ export default class UserController {
 
       if (!mongoose.Types.ObjectId.isValid(uid)) {
         res.status(404).json({ message: 'User Not Found' });
-
-        if (uid !== userId?.toString()) {
-          res.status(403).json({ message: 'Forbidden' });
-        }
-
-        await Promise.resolve().then(async () => {
-          const user = await UserModel.findById(uid).populate('bookings');
-          res.status(200).json(user);
-        });
       }
+
+      if (uid !== userId?.toString()) {
+        res.status(403).json({ message: 'Forbidden' });
+      }
+
+      await Promise.resolve().then(async () => {
+        const user = await UserModel.findById(uid).populate('bookings');
+        res.status(200).json(user);
+      });
     } catch (error: unknown) {
       await handleError(error, res);
     }
@@ -35,16 +35,16 @@ export default class UserController {
 
       if (!mongoose.Types.ObjectId.isValid(uid)) {
         res.status(404).json({ message: 'User Not Found' });
-
-        if (uid !== userId?.toString()) {
-          res.status(403).json({ message: 'Forbidden' });
-        }
-
-        await Promise.resolve().then(async () => {
-          const user = await UserModel.findByIdAndDelete(uid);
-          res.status(200).json(user);
-        });
       }
+
+      if (uid !== userId?.toString()) {
+        res.status(403).json({ message: 'Forbidden' });
+      }
+
+      await Promise.resolve().then(async () => {
+        const user = await UserModel.findByIdAndDelete(uid);
+        res.status(200).json(user);
+      });
     } catch (error: unknown) {
       await handleError(error, res);
     }
@@ -57,25 +57,24 @@ export default class UserController {
 
       if (!mongoose.Types.ObjectId.isValid(uid)) {
         res.status(404).json({ message: 'User Not Found' });
-
-        if (uid !== userId?.toString()) {
-          res.status(403).json({ message: 'Forbidden' });
-        }
-
-        await Promise.resolve().then(async () => {
-          const user = await UserModel.findByIdAndUpdate(
-            uid,
-            {
-              name,
-              photoURl,
-              address,
-              phoneNumber,
-            },
-            { new: true }
-          );
-          res.status(200).json(user);
-        });
       }
+      if (uid !== userId?.toString()) {
+        res.status(403).json({ message: 'Forbidden' });
+      }
+
+      await Promise.resolve().then(async () => {
+        const user = await UserModel.findByIdAndUpdate(
+          uid,
+          {
+            name,
+            photoURl,
+            address,
+            phoneNumber,
+          },
+          { new: true }
+        );
+        res.status(200).json(user);
+      });
     } catch (error: unknown) {
       await handleError(error, res);
     }

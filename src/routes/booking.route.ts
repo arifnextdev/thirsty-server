@@ -17,9 +17,18 @@ bookingRouter.post(
 bookingRouter.put('/read/:uid', authInstance.isAuthhenticated);
 
 //delete a booking
-bookingRouter.delete('/:bid', authInstance.isAuthhenticated);
+bookingRouter.delete(
+  '/:bid',
+  authInstance.isAuthhenticated,
+  bookingInstance.deleteABooking
+);
 
 //get all booking
-bookingRouter.get('/', authInstance.isAuthhenticated, authInstance.isAdmin);
+bookingRouter.get(
+  '/',
+  authInstance.isAuthhenticated,
+  authInstance.isAdmin,
+  bookingInstance.getAllBooking
+);
 
 export default bookingRouter;

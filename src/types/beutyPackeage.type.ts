@@ -5,7 +5,7 @@ import { bookingType } from './booking.type';
 export type beautyPackageType = {
   title: string;
   description: string;
-  catagory: string;
+  category: string;
   images: string[];
   price: number;
   speciallist: speciallisType;
