@@ -7,7 +7,6 @@ const authInstance = new AuthController();
 
 //register
 authRouter.post('/register', authInstance.register);
-
 //login
 authRouter.post('/login', authInstance.login);
 
