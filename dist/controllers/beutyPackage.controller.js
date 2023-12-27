@@ -10,8 +10,12 @@ class BeautyPackageController {
     constructor() { }
     async getAllBeautyPackages(req, res) {
         try {
+            const { page = 1, pageSize = 1 } = req.query;
+            const skip = (parseInt(page) - 1) * parseInt(pageSize);
             await Promise.resolve().then(async () => {
-                const beautyPackages = await beautyPackage_model_1.default.find({});
+                const beautyPackages = await beautyPackage_model_1.default.find({})
+                    .skip(skip)
+                    .limit(parseInt(pageSize));
                 res.status(200).json(beautyPackages);
             });
         }

@@ -11,8 +11,16 @@ export default class BeautyPackageController {
     res: Response
   ): Promise<void> {
     try {
+      const { page = 1, pageSize = 1 } = req.query;
+
+      const skip =
+        (parseInt(page as string) - 1) * parseInt(pageSize as string);
+
       await Promise.resolve().then(async () => {
-        const beautyPackages = await BeautyPackageModel.find({});
+        const beautyPackages = await BeautyPackageModel.find({})
+          .skip(skip)
+          .limit(parseInt(pageSize as string));
+
         res.status(200).json(beautyPackages);
       });
     } catch (error: unknown) {
