@@ -11,13 +11,19 @@ export default class BeautyPackageController {
     res: Response
   ): Promise<void> {
     try {
-      const { page = 1, pageSize = 1 } = req.query;
+      const { page = 1, pageSize = 10, search } = req.query;
 
       const skip =
         (parseInt(page as string) - 1) * parseInt(pageSize as string);
 
+      const query = search
+        ? {
+            $or: [{ title: { $regex: new RegExp(search as string, 'i') } }],
+          }
+        : {};
+
       await Promise.resolve().then(async () => {
-        const beautyPackages = await BeautyPackageModel.find({})
+        const beautyPackages = await BeautyPackageModel.find(query)
           .skip(skip)
           .limit(parseInt(pageSize as string));
 
