@@ -14,7 +14,7 @@ bookingRouter.post(
 );
 
 //get all booking for an user
-bookingRouter.put(
+bookingRouter.get(
   '/read/:uid',
   authInstance.isAuthhenticated,
   bookingInstance.getAllBooking
