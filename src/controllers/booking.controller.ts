@@ -58,33 +58,37 @@ export default class BookingController {
       const { bid } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(bid)) {
-        res.status(404).json({ message: 'Beauty Package Not Found' });
+        res.status(404).json({ message: 'Booking not found' });
       }
 
       const existedBooking = await BookingModel.findById(bid);
 
-      if (existedBooking) {
+      if (!existedBooking) {
         res.status(403).json({ message: "Booking doesn't exist" });
         return;
       }
+
       const user = await UserModel.findById(req.user?._id);
 
-      const mathchedBooking = user?.bookings.find(
+      const matchedBooking = user?.bookings.find(
         (booking: bookingType) => bid === booking._id.toString()
       );
 
-      if (!mathchedBooking) {
+      if (!matchedBooking) {
         res.status(403).json({ message: "Booking doesn't exist" });
+        return;
       }
 
       await Promise.resolve().then(async () => {
         const booking = await BookingModel.findByIdAndDelete(bid);
+
         res.status(200).json(booking);
       });
     } catch (error: unknown) {
       await handleError(error, res);
     }
   }
+
   public async getAllBooking(req: Request, res: Response): Promise<void> {
     try {
       await Promise.resolve().then(async () => {

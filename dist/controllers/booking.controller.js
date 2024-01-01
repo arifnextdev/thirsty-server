@@ -51,17 +51,18 @@ class BookingController {
         try {
             const { bid } = req.params;
             if (!mongoose_1.default.Types.ObjectId.isValid(bid)) {
-                res.status(404).json({ message: 'Beauty Package Not Found' });
+                res.status(404).json({ message: 'Booking not found' });
             }
             const existedBooking = await booking_model_1.default.findById(bid);
-            if (existedBooking) {
+            if (!existedBooking) {
                 res.status(403).json({ message: "Booking doesn't exist" });
                 return;
             }
             const user = await user_model_1.default.findById((_a = req.user) === null || _a === void 0 ? void 0 : _a._id);
-            const mathchedBooking = user === null || user === void 0 ? void 0 : user.bookings.find((booking) => bid === booking._id.toString());
-            if (!mathchedBooking) {
+            const matchedBooking = user === null || user === void 0 ? void 0 : user.bookings.find((booking) => bid === booking._id.toString());
+            if (!matchedBooking) {
                 res.status(403).json({ message: "Booking doesn't exist" });
+                return;
             }
             await Promise.resolve().then(async () => {
                 const booking = await booking_model_1.default.findByIdAndDelete(bid);
