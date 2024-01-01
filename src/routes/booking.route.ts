@@ -13,6 +13,8 @@ bookingRouter.post(
   bookingInstance.createABooking
 );
 
+///get booking
+
 //delete a booking
 bookingRouter.delete(
   '/:bid',
