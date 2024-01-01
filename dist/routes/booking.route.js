@@ -12,7 +12,7 @@ const bookingInstance = new booking_controller_1.default();
 //create a booking
 bookingRouter.post('/create/:bid', authInstance.isAuthhenticated, bookingInstance.createABooking);
 //get all booking for an user
-bookingRouter.put('/read/:uid', authInstance.isAuthhenticated);
+bookingRouter.put('/read/:uid', authInstance.isAuthhenticated, bookingInstance.getAllBooking);
 //delete a booking
 bookingRouter.delete('/:bid', authInstance.isAuthhenticated, bookingInstance.deleteABooking);
 //get all booking

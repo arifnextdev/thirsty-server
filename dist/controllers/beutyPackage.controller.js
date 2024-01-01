@@ -10,7 +10,7 @@ class BeautyPackageController {
     constructor() { }
     async getAllBeautyPackages(req, res) {
         try {
-            const { page = 1, pageSize = 10, search } = req.query;
+            const { page = 10, pageSize = 10, search } = req.query;
             const skip = (parseInt(page) - 1) * parseInt(pageSize);
             const query = search
                 ? {

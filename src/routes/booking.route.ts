@@ -14,7 +14,11 @@ bookingRouter.post(
 );
 
 //get all booking for an user
-bookingRouter.put('/read/:uid', authInstance.isAuthhenticated);
+bookingRouter.put(
+  '/read/:uid',
+  authInstance.isAuthhenticated,
+  bookingInstance.getAllBooking
+);
 
 //delete a booking
 bookingRouter.delete(
