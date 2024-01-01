@@ -11,6 +11,7 @@ const authInstance = new auth_middelware_1.default();
 const bookingInstance = new booking_controller_1.default();
 //create a booking
 bookingRouter.post('/create/:bid', authInstance.isAuthhenticated, bookingInstance.createABooking);
+///get booking
 //delete a booking
 bookingRouter.delete('/:bid', authInstance.isAuthhenticated, bookingInstance.deleteABooking);
 //get all booking
