@@ -22,7 +22,7 @@ bookingRouter.delete(
   bookingInstance.deleteABooking
 );
 bookingRouter.get(
-  '/:bid',
+  '/:boid',
   authInstance.isAuthhenticated,
   bookingInstance.getSingleBooking
 );
