@@ -21,6 +21,11 @@ bookingRouter.delete(
   authInstance.isAuthhenticated,
   bookingInstance.deleteABooking
 );
+bookingRouter.get(
+  '/:bid',
+  authInstance.isAuthhenticated,
+  bookingInstance.getSingleBooking
+);
 
 //get all booking
 bookingRouter.get(

@@ -13,7 +13,6 @@ specialistRouter.get('/', specialistInstance.getAllSpecialists);
 //get single specialist
 
 specialistRouter.get('/:sid', specialistInstance.getAnSpecialist);
-
 //create specialist
 
 specialistRouter.post(

@@ -53,6 +53,22 @@ export default class BookingController {
     }
   }
 
+  public async getSingleBooking(req: Request, res: Response): Promise<void> {
+    try {
+      const { bid } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(bid)) {
+        res.status(404).json({ message: 'Booking not found' });
+      }
+
+      const booking = await BookingModel.findById(bid);
+
+      res.status(200).json(booking);
+    } catch (error: unknown) {
+      await handleError(error, res);
+    }
+  }
+
   public async deleteABooking(req: Request, res: Response): Promise<void> {
     try {
       const { bid } = req.params;
