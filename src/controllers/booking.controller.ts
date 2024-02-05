@@ -36,13 +36,13 @@ export default class BookingController {
 
         await BeautyPackageModel.findByIdAndUpdate(bid, {
           $addToSet: {
-            bookings: booking._id,
+            bookings: booking,
           },
         });
 
         await UserModel.findByIdAndUpdate(req.user?._id, {
           $addToSet: {
-            bookings: booking._id,
+            bookings: booking,
           },
         });
 
