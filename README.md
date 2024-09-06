@@ -1,4 +1,3 @@
-```markdown
 # Thirsty Server
 
 Thirsty Server is a backend API built with Node.js, Express, MongoDB, and TypeScript for managing beauty products. It includes modern security practices, user authentication, and validation features to ensure smooth and secure product management.
